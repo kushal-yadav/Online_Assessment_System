@@ -1,0 +1,970 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="OASModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="category">
+          <Key>
+            <PropertyRef Name="categoryID" />
+          </Key>
+          <Property Name="categoryID" Type="int" Nullable="false" />
+          <Property Name="categoryName" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="created_by" Type="varchar" MaxLength="30" />
+          <Property Name="modified_by" Type="varchar" MaxLength="30" />
+          <Property Name="created_on" Type="datetime" />
+          <Property Name="modified_on" Type="datetime" />
+          <Property Name="is_Active" Type="bit" />
+        </EntityType>
+        <EntityType Name="questions">
+          <Key>
+            <PropertyRef Name="questionID" />
+          </Key>
+          <Property Name="questionID" Type="int" Nullable="false" />
+          <Property Name="questionText" Type="varchar" MaxLength="60" />
+          <Property Name="answerType" Type="int" Nullable="false" />
+          <Property Name="option1" Type="varchar" MaxLength="30" />
+          <Property Name="option2" Type="varchar" MaxLength="30" />
+          <Property Name="option3" Type="varchar" MaxLength="30" />
+          <Property Name="option4" Type="varchar" MaxLength="30" />
+          <Property Name="topicID" Type="int" />
+          <Property Name="testid" Type="int" />
+          <Property Name="answer" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="marks" Type="int" Nullable="false" />
+          <Property Name="complexity" Type="int" />
+          <Property Name="created_by" Type="varchar" MaxLength="30" />
+          <Property Name="modified_by" Type="varchar" MaxLength="30" />
+          <Property Name="created_on" Type="datetime" />
+          <Property Name="modified_on" Type="datetime" />
+          <Property Name="is_Active" Type="bit" />
+        </EntityType>
+        <EntityType Name="roles">
+          <Key>
+            <PropertyRef Name="roleID" />
+          </Key>
+          <Property Name="roleID" Type="int" Nullable="false" />
+          <Property Name="roleName" Type="varchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="subcategory">
+          <Key>
+            <PropertyRef Name="subcategoryID" />
+          </Key>
+          <Property Name="subcategoryID" Type="int" Nullable="false" />
+          <Property Name="subcategoryName" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="categoryID" Type="int" />
+          <Property Name="created_by" Type="varchar" MaxLength="30" />
+          <Property Name="modified_by" Type="varchar" MaxLength="30" />
+          <Property Name="created_on" Type="datetime" />
+          <Property Name="modified_on" Type="datetime" />
+          <Property Name="is_Active" Type="bit" />
+        </EntityType>
+        <EntityType Name="subcategoryTopic">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="subcategoryID" Type="int" />
+          <Property Name="topicID" Type="int" />
+          <Property Name="id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="test">
+          <Key>
+            <PropertyRef Name="testID" />
+          </Key>
+          <Property Name="testID" Type="int" Nullable="false" />
+          <Property Name="duration" Type="time" Precision="7" Nullable="false" />
+          <Property Name="subcategoryID" Type="int" />
+          <Property Name="questionPaperName" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="totalMarks" Type="int" />
+          <Property Name="available" Type="bit" />
+          <Property Name="created_by" Type="varchar" MaxLength="30" />
+          <Property Name="modified_by" Type="varchar" MaxLength="30" />
+          <Property Name="created_on" Type="datetime" />
+          <Property Name="modified_on" Type="datetime" />
+          <Property Name="is_Active" Type="bit" />
+          <Property Name="passingMarks" Type="int" />
+        </EntityType>
+        <EntityType Name="testLog">
+          <Key>
+            <PropertyRef Name="testLogID" />
+          </Key>
+          <Property Name="testStarted" Type="datetime" />
+          <Property Name="testEnded" Type="datetime" />
+          <Property Name="marksScored" Type="int" />
+          <Property Name="topicID" Type="int" />
+          <Property Name="userTestID" Type="int" />
+          <Property Name="testLogID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="topic">
+          <Key>
+            <PropertyRef Name="topicID" />
+          </Key>
+          <Property Name="topicID" Type="int" Nullable="false" />
+          <Property Name="topicName" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="created_by" Type="varchar" MaxLength="30" />
+          <Property Name="modified_by" Type="varchar" MaxLength="30" />
+          <Property Name="created_on" Type="datetime" />
+          <Property Name="modified_on" Type="datetime" />
+          <Property Name="is_Active" Type="bit" />
+        </EntityType>
+        <EntityType Name="users">
+          <Key>
+            <PropertyRef Name="userID" />
+          </Key>
+          <Property Name="roleID" Type="int" />
+          <Property Name="userID" Type="int" Nullable="false" />
+          <Property Name="username" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="passw" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="gender" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="createdDate" Type="datetime" />
+          <Property Name="is_Active" Type="bit" />
+        </EntityType>
+        <EntityType Name="userTest">
+          <Key>
+            <PropertyRef Name="userTestID" />
+          </Key>
+          <Property Name="userTestID" Type="int" Nullable="false" />
+          <Property Name="userID" Type="int" />
+          <Property Name="testID" Type="int" />
+          <Property Name="marksScored" Type="int" />
+          <Property Name="statusOfTest" Type="varchar" MaxLength="30" />
+          <Property Name="created_by" Type="varchar" MaxLength="30" />
+          <Property Name="modified_by" Type="varchar" MaxLength="30" />
+          <Property Name="is_Active" Type="bit" />
+        </EntityType>
+        <EntityType Name="userTestAnswer">
+          <Key>
+            <PropertyRef Name="userTestAnswerID" />
+          </Key>
+          <Property Name="userTestAnswerID" Type="int" Nullable="false" />
+          <Property Name="userTestID" Type="int" />
+          <Property Name="questionID" Type="int" />
+          <Property Name="answerMarked" Type="varchar" MaxLength="30" />
+          <Property Name="srno" Type="int" />
+        </EntityType>
+        <Association Name="FK__questions__testi__239E4DCF">
+          <End Role="test" Type="Self.test" Multiplicity="0..1" />
+          <End Role="questions" Type="Self.questions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="test">
+              <PropertyRef Name="testID" />
+            </Principal>
+            <Dependent Role="questions">
+              <PropertyRef Name="testid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__questions__topic__24927208">
+          <End Role="topic" Type="Self.topic" Multiplicity="0..1" />
+          <End Role="questions" Type="Self.questions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="topic">
+              <PropertyRef Name="topicID" />
+            </Principal>
+            <Dependent Role="questions">
+              <PropertyRef Name="topicID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__subcatego__categ__25869641">
+          <End Role="category" Type="Self.category" Multiplicity="0..1" />
+          <End Role="subcategory" Type="Self.subcategory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="category">
+              <PropertyRef Name="categoryID" />
+            </Principal>
+            <Dependent Role="subcategory">
+              <PropertyRef Name="categoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__subcatego__subca__267ABA7A">
+          <End Role="subcategory" Type="Self.subcategory" Multiplicity="0..1" />
+          <End Role="subcategoryTopic" Type="Self.subcategoryTopic" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="subcategory">
+              <PropertyRef Name="subcategoryID" />
+            </Principal>
+            <Dependent Role="subcategoryTopic">
+              <PropertyRef Name="subcategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__subcatego__topic__276EDEB3">
+          <End Role="topic" Type="Self.topic" Multiplicity="0..1" />
+          <End Role="subcategoryTopic" Type="Self.subcategoryTopic" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="topic">
+              <PropertyRef Name="topicID" />
+            </Principal>
+            <Dependent Role="subcategoryTopic">
+              <PropertyRef Name="topicID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__test__subcategor__286302EC">
+          <End Role="subcategory" Type="Self.subcategory" Multiplicity="0..1" />
+          <End Role="test" Type="Self.test" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="subcategory">
+              <PropertyRef Name="subcategoryID" />
+            </Principal>
+            <Dependent Role="test">
+              <PropertyRef Name="subcategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__testLog__topicID__29572725">
+          <End Role="topic" Type="Self.topic" Multiplicity="0..1" />
+          <End Role="testLog" Type="Self.testLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="topic">
+              <PropertyRef Name="topicID" />
+            </Principal>
+            <Dependent Role="testLog">
+              <PropertyRef Name="topicID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__testLog__userTes__2A4B4B5E">
+          <End Role="userTest" Type="Self.userTest" Multiplicity="0..1" />
+          <End Role="testLog" Type="Self.testLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="userTest">
+              <PropertyRef Name="userTestID" />
+            </Principal>
+            <Dependent Role="testLog">
+              <PropertyRef Name="userTestID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__users__roleID__2B3F6F97">
+          <End Role="roles" Type="Self.roles" Multiplicity="0..1" />
+          <End Role="users" Type="Self.users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="roles">
+              <PropertyRef Name="roleID" />
+            </Principal>
+            <Dependent Role="users">
+              <PropertyRef Name="roleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__userTest__testID__2C3393D0">
+          <End Role="test" Type="Self.test" Multiplicity="0..1" />
+          <End Role="userTest" Type="Self.userTest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="test">
+              <PropertyRef Name="testID" />
+            </Principal>
+            <Dependent Role="userTest">
+              <PropertyRef Name="testID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__userTest__userID__2D27B809">
+          <End Role="users" Type="Self.users" Multiplicity="0..1" />
+          <End Role="userTest" Type="Self.userTest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="userID" />
+            </Principal>
+            <Dependent Role="userTest">
+              <PropertyRef Name="userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_questionID">
+          <End Role="questions" Type="Self.questions" Multiplicity="0..1" />
+          <End Role="userTestAnswer" Type="Self.userTestAnswer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="questions">
+              <PropertyRef Name="questionID" />
+            </Principal>
+            <Dependent Role="userTestAnswer">
+              <PropertyRef Name="questionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_usertestID">
+          <End Role="userTest" Type="Self.userTest" Multiplicity="0..1" />
+          <End Role="userTestAnswer" Type="Self.userTestAnswer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="userTest">
+              <PropertyRef Name="userTestID" />
+            </Principal>
+            <Dependent Role="userTestAnswer">
+              <PropertyRef Name="userTestID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="OASModelStoreContainer">
+          <EntitySet Name="category" EntityType="Self.category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="questions" EntityType="Self.questions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="roles" EntityType="Self.roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="subcategory" EntityType="Self.subcategory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="subcategoryTopic" EntityType="Self.subcategoryTopic" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="test" EntityType="Self.test" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="testLog" EntityType="Self.testLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="topic" EntityType="Self.topic" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="users" EntityType="Self.users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="userTest" EntityType="Self.userTest" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="userTestAnswer" EntityType="Self.userTestAnswer" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__questions__testi__239E4DCF" Association="Self.FK__questions__testi__239E4DCF">
+            <End Role="test" EntitySet="test" />
+            <End Role="questions" EntitySet="questions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__questions__topic__24927208" Association="Self.FK__questions__topic__24927208">
+            <End Role="topic" EntitySet="topic" />
+            <End Role="questions" EntitySet="questions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__subcatego__categ__25869641" Association="Self.FK__subcatego__categ__25869641">
+            <End Role="category" EntitySet="category" />
+            <End Role="subcategory" EntitySet="subcategory" />
+          </AssociationSet>
+          <AssociationSet Name="FK__subcatego__subca__267ABA7A" Association="Self.FK__subcatego__subca__267ABA7A">
+            <End Role="subcategory" EntitySet="subcategory" />
+            <End Role="subcategoryTopic" EntitySet="subcategoryTopic" />
+          </AssociationSet>
+          <AssociationSet Name="FK__subcatego__topic__276EDEB3" Association="Self.FK__subcatego__topic__276EDEB3">
+            <End Role="topic" EntitySet="topic" />
+            <End Role="subcategoryTopic" EntitySet="subcategoryTopic" />
+          </AssociationSet>
+          <AssociationSet Name="FK__test__subcategor__286302EC" Association="Self.FK__test__subcategor__286302EC">
+            <End Role="subcategory" EntitySet="subcategory" />
+            <End Role="test" EntitySet="test" />
+          </AssociationSet>
+          <AssociationSet Name="FK__testLog__topicID__29572725" Association="Self.FK__testLog__topicID__29572725">
+            <End Role="topic" EntitySet="topic" />
+            <End Role="testLog" EntitySet="testLog" />
+          </AssociationSet>
+          <AssociationSet Name="FK__testLog__userTes__2A4B4B5E" Association="Self.FK__testLog__userTes__2A4B4B5E">
+            <End Role="userTest" EntitySet="userTest" />
+            <End Role="testLog" EntitySet="testLog" />
+          </AssociationSet>
+          <AssociationSet Name="FK__users__roleID__2B3F6F97" Association="Self.FK__users__roleID__2B3F6F97">
+            <End Role="roles" EntitySet="roles" />
+            <End Role="users" EntitySet="users" />
+          </AssociationSet>
+          <AssociationSet Name="FK__userTest__testID__2C3393D0" Association="Self.FK__userTest__testID__2C3393D0">
+            <End Role="test" EntitySet="test" />
+            <End Role="userTest" EntitySet="userTest" />
+          </AssociationSet>
+          <AssociationSet Name="FK__userTest__userID__2D27B809" Association="Self.FK__userTest__userID__2D27B809">
+            <End Role="users" EntitySet="users" />
+            <End Role="userTest" EntitySet="userTest" />
+          </AssociationSet>
+          <AssociationSet Name="FK_questionID" Association="Self.FK_questionID">
+            <End Role="questions" EntitySet="questions" />
+            <End Role="userTestAnswer" EntitySet="userTestAnswer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_usertestID" Association="Self.FK_usertestID">
+            <End Role="userTest" EntitySet="userTest" />
+            <End Role="userTestAnswer" EntitySet="userTestAnswer" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="OASModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="category">
+          <Key>
+            <PropertyRef Name="categoryID" />
+          </Key>
+          <Property Name="categoryID" Type="Int32" Nullable="false" />
+          <Property Name="categoryName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="created_by" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="modified_by" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="created_on" Type="DateTime" Precision="3" />
+          <Property Name="modified_on" Type="DateTime" Precision="3" />
+          <Property Name="is_Active" Type="Boolean" />
+          <NavigationProperty Name="subcategories" Relationship="Self.FK__subcatego__categ__1273C1CD" FromRole="category" ToRole="subcategory" />
+        </EntityType>
+        <EntityType Name="role">
+          <Key>
+            <PropertyRef Name="roleID" />
+          </Key>
+          <Property Name="roleID" Type="Int32" Nullable="false" />
+          <Property Name="roleName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="users" Relationship="OASModel.FK__users__roleID__2B3F6F97" FromRole="role" ToRole="user" />
+        </EntityType>
+        <EntityType Name="subcategory">
+          <Key>
+            <PropertyRef Name="subcategoryID" />
+          </Key>
+          <Property Name="subcategoryID" Type="Int32" Nullable="false" />
+          <Property Name="subcategoryName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="categoryID" Type="Int32" />
+          <Property Name="created_by" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="modified_by" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="created_on" Type="DateTime" Precision="3" />
+          <Property Name="modified_on" Type="DateTime" Precision="3" />
+          <Property Name="is_Active" Type="Boolean" />
+          <NavigationProperty Name="category" Relationship="Self.FK__subcatego__categ__1273C1CD" FromRole="subcategory" ToRole="category" />
+          <NavigationProperty Name="subcategoryTopics" Relationship="Self.FK__subcatego__subca__38996AB5" FromRole="subcategory" ToRole="subcategoryTopic" />
+          <NavigationProperty Name="tests" Relationship="OASModel.FK__test__subcategor__286302EC" FromRole="subcategory" ToRole="test" />
+        </EntityType>
+        <EntityType Name="subcategoryTopic">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="subcategoryID" Type="Int32" />
+          <Property Name="topicID" Type="Int32" />
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="subcategory" Relationship="Self.FK__subcatego__subca__38996AB5" FromRole="subcategoryTopic" ToRole="subcategory" />
+          <NavigationProperty Name="topic" Relationship="Self.FK__subcatego__topic__398D8EEE" FromRole="subcategoryTopic" ToRole="topic" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="topic">
+          <Key>
+            <PropertyRef Name="topicID" />
+          </Key>
+          <Property Name="topicID" Type="Int32" Nullable="false" />
+          <Property Name="topicName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="created_by" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="modified_by" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="created_on" Type="DateTime" Precision="3" />
+          <Property Name="modified_on" Type="DateTime" Precision="3" />
+          <Property Name="is_Active" Type="Boolean" />
+          <NavigationProperty Name="subcategoryTopics" Relationship="Self.FK__subcatego__topic__398D8EEE" FromRole="topic" ToRole="subcategoryTopic" />
+          <NavigationProperty Name="testLogs" Relationship="OASModel.FK__testLog__topicID__2C3393D0" FromRole="topic" ToRole="testLog" />
+          <NavigationProperty Name="questions" Relationship="OASModel.FK__questions__topic__24927208" FromRole="topic" ToRole="question" />
+        </EntityType>
+        <EntityType Name="userTest">
+          <Key>
+            <PropertyRef Name="userTestID" />
+          </Key>
+          <Property Name="userTestID" Type="Int32" Nullable="false" />
+          <Property Name="userID" Type="Int32" />
+          <Property Name="testID" Type="Int32" />
+          <Property Name="marksScored" Type="Int32" />
+          <Property Name="statusOfTest" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="userTestAnswers" Relationship="Self.FK_usertestID" FromRole="userTest" ToRole="userTestAnswer" />
+          <NavigationProperty Name="testLogs" Relationship="OASModel.FK__testLog__userTes__3A81B327" FromRole="userTest" ToRole="testLog" />
+          <Property Name="created_by" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="modified_by" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="is_Active" Type="Boolean" />
+          <NavigationProperty Name="test" Relationship="OASModel.FK__userTest__testID__2C3393D0" FromRole="userTest" ToRole="test" />
+          <NavigationProperty Name="user" Relationship="OASModel.FK__userTest__userID__2D27B809" FromRole="userTest" ToRole="user" />
+        </EntityType>
+        <EntityType Name="userTestAnswer">
+          <Key>
+            <PropertyRef Name="userTestAnswerID" />
+          </Key>
+          <Property Name="userTestAnswerID" Type="Int32" Nullable="false" />
+          <Property Name="userTestID" Type="Int32" />
+          <Property Name="questionID" Type="Int32" />
+          <Property Name="answerMarked" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="userTest" Relationship="Self.FK_usertestID" FromRole="userTestAnswer" ToRole="userTest" />
+          <Property Name="srno" Type="Int32" />
+          <NavigationProperty Name="question" Relationship="OASModel.FK_questionID" FromRole="userTestAnswer" ToRole="question" />
+        </EntityType>
+        <Association Name="FK__subcatego__categ__1273C1CD">
+          <End Role="category" Type="Self.category" Multiplicity="0..1" />
+          <End Role="subcategory" Type="Self.subcategory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="category">
+              <PropertyRef Name="categoryID" />
+            </Principal>
+            <Dependent Role="subcategory">
+              <PropertyRef Name="categoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__subcatego__subca__38996AB5">
+          <End Role="subcategory" Type="Self.subcategory" Multiplicity="0..1" />
+          <End Role="subcategoryTopic" Type="Self.subcategoryTopic" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="subcategory">
+              <PropertyRef Name="subcategoryID" />
+            </Principal>
+            <Dependent Role="subcategoryTopic">
+              <PropertyRef Name="subcategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__subcatego__topic__398D8EEE">
+          <End Role="topic" Type="Self.topic" Multiplicity="0..1" />
+          <End Role="subcategoryTopic" Type="Self.subcategoryTopic" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="topic">
+              <PropertyRef Name="topicID" />
+            </Principal>
+            <Dependent Role="subcategoryTopic">
+              <PropertyRef Name="topicID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_usertestID">
+          <End Role="userTest" Type="Self.userTest" Multiplicity="0..1" />
+          <End Role="userTestAnswer" Type="Self.userTestAnswer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="userTest">
+              <PropertyRef Name="userTestID" />
+            </Principal>
+            <Dependent Role="userTestAnswer">
+              <PropertyRef Name="userTestID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="OASEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="categories" EntityType="Self.category" />
+          <EntitySet Name="roles" EntityType="Self.role" />
+          <EntitySet Name="subcategories" EntityType="Self.subcategory" />
+          <EntitySet Name="subcategoryTopics" EntityType="Self.subcategoryTopic" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="topics" EntityType="Self.topic" />
+          <EntitySet Name="userTests" EntityType="Self.userTest" />
+          <EntitySet Name="userTestAnswers" EntityType="Self.userTestAnswer" />
+          <AssociationSet Name="FK__subcatego__categ__1273C1CD" Association="Self.FK__subcatego__categ__1273C1CD">
+            <End Role="category" EntitySet="categories" />
+            <End Role="subcategory" EntitySet="subcategories" />
+          </AssociationSet>
+          <AssociationSet Name="FK__subcatego__subca__38996AB5" Association="Self.FK__subcatego__subca__38996AB5">
+            <End Role="subcategory" EntitySet="subcategories" />
+            <End Role="subcategoryTopic" EntitySet="subcategoryTopics" />
+          </AssociationSet>
+          <AssociationSet Name="FK__subcatego__topic__398D8EEE" Association="Self.FK__subcatego__topic__398D8EEE">
+            <End Role="topic" EntitySet="topics" />
+            <End Role="subcategoryTopic" EntitySet="subcategoryTopics" />
+          </AssociationSet>
+          <AssociationSet Name="FK_usertestID" Association="Self.FK_usertestID">
+            <End Role="userTest" EntitySet="userTests" />
+            <End Role="userTestAnswer" EntitySet="userTestAnswers" />
+          </AssociationSet>
+          <EntitySet Name="testLogs" EntityType="OASModel.testLog" />
+          <AssociationSet Name="FK__testLog__topicID__2C3393D0" Association="OASModel.FK__testLog__topicID__2C3393D0">
+            <End Role="topic" EntitySet="topics" />
+            <End Role="testLog" EntitySet="testLogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__testLog__userTes__3A81B327" Association="OASModel.FK__testLog__userTes__3A81B327">
+            <End Role="userTest" EntitySet="userTests" />
+            <End Role="testLog" EntitySet="testLogs" />
+          </AssociationSet>
+          <EntitySet Name="tests" EntityType="OASModel.test" />
+          <AssociationSet Name="FK__test__subcategor__286302EC" Association="OASModel.FK__test__subcategor__286302EC">
+            <End Role="subcategory" EntitySet="subcategories" />
+            <End Role="test" EntitySet="tests" />
+          </AssociationSet>
+          <AssociationSet Name="FK__userTest__testID__2C3393D0" Association="OASModel.FK__userTest__testID__2C3393D0">
+            <End Role="test" EntitySet="tests" />
+            <End Role="userTest" EntitySet="userTests" />
+          </AssociationSet>
+          <EntitySet Name="questions" EntityType="OASModel.question" />
+          <AssociationSet Name="FK__questions__testi__239E4DCF" Association="OASModel.FK__questions__testi__239E4DCF">
+            <End Role="test" EntitySet="tests" />
+            <End Role="question" EntitySet="questions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__questions__topic__24927208" Association="OASModel.FK__questions__topic__24927208">
+            <End Role="topic" EntitySet="topics" />
+            <End Role="question" EntitySet="questions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_questionID" Association="OASModel.FK_questionID">
+            <End Role="question" EntitySet="questions" />
+            <End Role="userTestAnswer" EntitySet="userTestAnswers" />
+          </AssociationSet>
+          <EntitySet Name="users" EntityType="OASModel.user" />
+          <AssociationSet Name="FK__users__roleID__2B3F6F97" Association="OASModel.FK__users__roleID__2B3F6F97">
+            <End Role="role" EntitySet="roles" />
+            <End Role="user" EntitySet="users" />
+          </AssociationSet>
+          <AssociationSet Name="FK__userTest__userID__2D27B809" Association="OASModel.FK__userTest__userID__2D27B809">
+            <End Role="user" EntitySet="users" />
+            <End Role="userTest" EntitySet="userTests" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="testLog">
+          <Key>
+            <PropertyRef Name="testLogID" />
+          </Key>
+          <Property Name="testStarted" Type="DateTime" Precision="3" />
+          <Property Name="testEnded" Type="DateTime" Precision="3" />
+          <Property Name="marksScored" Type="Int32" />
+          <Property Name="topicID" Type="Int32" />
+          <Property Name="userTestID" Type="Int32" />
+          <Property Name="testLogID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="topic" Relationship="OASModel.FK__testLog__topicID__2C3393D0" FromRole="testLog" ToRole="topic" />
+          <NavigationProperty Name="userTest" Relationship="OASModel.FK__testLog__userTes__3A81B327" FromRole="testLog" ToRole="userTest" />
+        </EntityType>
+        <Association Name="FK__testLog__topicID__2C3393D0">
+          <End Type="OASModel.topic" Role="topic" Multiplicity="0..1" />
+          <End Type="OASModel.testLog" Role="testLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="topic">
+              <PropertyRef Name="topicID" />
+            </Principal>
+            <Dependent Role="testLog">
+              <PropertyRef Name="topicID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__testLog__userTes__3A81B327">
+          <End Type="OASModel.userTest" Role="userTest" Multiplicity="0..1" />
+          <End Type="OASModel.testLog" Role="testLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="userTest">
+              <PropertyRef Name="userTestID" />
+            </Principal>
+            <Dependent Role="testLog">
+              <PropertyRef Name="userTestID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="test">
+          <Key>
+            <PropertyRef Name="testID" />
+          </Key>
+          <Property Name="testID" Type="Int32" Nullable="false" />
+          <Property Name="duration" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="subcategoryID" Type="Int32" />
+          <Property Name="questionPaperName" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="totalMarks" Type="Int32" />
+          <Property Name="available" Type="Boolean" />
+          <Property Name="created_by" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="modified_by" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="created_on" Type="DateTime" Precision="3" />
+          <Property Name="modified_on" Type="DateTime" Precision="3" />
+          <Property Name="is_Active" Type="Boolean" />
+          <Property Name="passingMarks" Type="Int32" />
+          <NavigationProperty Name="subcategory" Relationship="OASModel.FK__test__subcategor__286302EC" FromRole="test" ToRole="subcategory" />
+          <NavigationProperty Name="userTests" Relationship="OASModel.FK__userTest__testID__2C3393D0" FromRole="test" ToRole="userTest" />
+          <NavigationProperty Name="questions" Relationship="OASModel.FK__questions__testi__239E4DCF" FromRole="test" ToRole="question" />
+        </EntityType>
+        <Association Name="FK__test__subcategor__286302EC">
+          <End Type="OASModel.subcategory" Role="subcategory" Multiplicity="0..1" />
+          <End Type="OASModel.test" Role="test" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="subcategory">
+              <PropertyRef Name="subcategoryID" />
+            </Principal>
+            <Dependent Role="test">
+              <PropertyRef Name="subcategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__userTest__testID__2C3393D0">
+          <End Type="OASModel.test" Role="test" Multiplicity="0..1" />
+          <End Type="OASModel.userTest" Role="userTest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="test">
+              <PropertyRef Name="testID" />
+            </Principal>
+            <Dependent Role="userTest">
+              <PropertyRef Name="testID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="question">
+          <Key>
+            <PropertyRef Name="questionID" />
+          </Key>
+          <Property Name="questionID" Type="Int32" Nullable="false" />
+          <Property Name="questionText" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="answerType" Type="Int32" Nullable="false" />
+          <Property Name="option1" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="option2" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="option3" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="option4" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="topicID" Type="Int32" />
+          <Property Name="testid" Type="Int32" />
+          <Property Name="answer" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="marks" Type="Int32" Nullable="false" />
+          <Property Name="complexity" Type="Int32" />
+          <Property Name="created_by" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="modified_by" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="created_on" Type="DateTime" Precision="3" />
+          <Property Name="modified_on" Type="DateTime" Precision="3" />
+          <Property Name="is_Active" Type="Boolean" />
+          <NavigationProperty Name="test" Relationship="OASModel.FK__questions__testi__239E4DCF" FromRole="question" ToRole="test" />
+          <NavigationProperty Name="topic" Relationship="OASModel.FK__questions__topic__24927208" FromRole="question" ToRole="topic" />
+          <NavigationProperty Name="userTestAnswers" Relationship="OASModel.FK_questionID" FromRole="question" ToRole="userTestAnswer" />
+        </EntityType>
+        <Association Name="FK__questions__testi__239E4DCF">
+          <End Type="OASModel.test" Role="test" Multiplicity="0..1" />
+          <End Type="OASModel.question" Role="question" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="test">
+              <PropertyRef Name="testID" />
+            </Principal>
+            <Dependent Role="question">
+              <PropertyRef Name="testid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__questions__topic__24927208">
+          <End Type="OASModel.topic" Role="topic" Multiplicity="0..1" />
+          <End Type="OASModel.question" Role="question" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="topic">
+              <PropertyRef Name="topicID" />
+            </Principal>
+            <Dependent Role="question">
+              <PropertyRef Name="topicID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_questionID">
+          <End Type="OASModel.question" Role="question" Multiplicity="0..1" />
+          <End Type="OASModel.userTestAnswer" Role="userTestAnswer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="question">
+              <PropertyRef Name="questionID" />
+            </Principal>
+            <Dependent Role="userTestAnswer">
+              <PropertyRef Name="questionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="user">
+          <Key>
+            <PropertyRef Name="userID" />
+          </Key>
+          <Property Name="roleID" Type="Int32" />
+          <Property Name="userID" Type="Int32" Nullable="false" />
+          <Property Name="username" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="passw" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="gender" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="createdDate" Type="DateTime" Precision="3" />
+          <Property Name="is_Active" Type="Boolean" />
+          <NavigationProperty Name="role" Relationship="OASModel.FK__users__roleID__2B3F6F97" FromRole="user" ToRole="role" />
+          <NavigationProperty Name="userTests" Relationship="OASModel.FK__userTest__userID__2D27B809" FromRole="user" ToRole="userTest" />
+        </EntityType>
+        <Association Name="FK__users__roleID__2B3F6F97">
+          <End Type="OASModel.role" Role="role" Multiplicity="0..1" />
+          <End Type="OASModel.user" Role="user" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="role">
+              <PropertyRef Name="roleID" />
+            </Principal>
+            <Dependent Role="user">
+              <PropertyRef Name="roleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__userTest__userID__2D27B809">
+          <End Type="OASModel.user" Role="user" Multiplicity="0..1" />
+          <End Type="OASModel.userTest" Role="userTest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="userID" />
+            </Principal>
+            <Dependent Role="userTest">
+              <PropertyRef Name="userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="OASModelStoreContainer" CdmEntityContainer="OASEntities">
+          <EntitySetMapping Name="categories">
+            <EntityTypeMapping TypeName="OASModel.category">
+              <MappingFragment StoreEntitySet="category">
+                <ScalarProperty Name="categoryID" ColumnName="categoryID" />
+                <ScalarProperty Name="categoryName" ColumnName="categoryName" />
+                <ScalarProperty Name="created_by" ColumnName="created_by" />
+                <ScalarProperty Name="modified_by" ColumnName="modified_by" />
+                <ScalarProperty Name="created_on" ColumnName="created_on" />
+                <ScalarProperty Name="modified_on" ColumnName="modified_on" />
+                <ScalarProperty Name="is_Active" ColumnName="is_Active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="roles">
+            <EntityTypeMapping TypeName="OASModel.role">
+              <MappingFragment StoreEntitySet="roles">
+                <ScalarProperty Name="roleID" ColumnName="roleID" />
+                <ScalarProperty Name="roleName" ColumnName="roleName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="subcategories">
+            <EntityTypeMapping TypeName="OASModel.subcategory">
+              <MappingFragment StoreEntitySet="subcategory">
+                <ScalarProperty Name="subcategoryID" ColumnName="subcategoryID" />
+                <ScalarProperty Name="subcategoryName" ColumnName="subcategoryName" />
+                <ScalarProperty Name="categoryID" ColumnName="categoryID" />
+                <ScalarProperty Name="created_by" ColumnName="created_by" />
+                <ScalarProperty Name="modified_by" ColumnName="modified_by" />
+                <ScalarProperty Name="created_on" ColumnName="created_on" />
+                <ScalarProperty Name="modified_on" ColumnName="modified_on" />
+                <ScalarProperty Name="is_Active" ColumnName="is_Active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="subcategoryTopics">
+            <EntityTypeMapping TypeName="OASModel.subcategoryTopic">
+              <MappingFragment StoreEntitySet="subcategoryTopic">
+                <ScalarProperty Name="subcategoryID" ColumnName="subcategoryID" />
+                <ScalarProperty Name="topicID" ColumnName="topicID" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="OASModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="topics">
+            <EntityTypeMapping TypeName="OASModel.topic">
+              <MappingFragment StoreEntitySet="topic">
+                <ScalarProperty Name="topicID" ColumnName="topicID" />
+                <ScalarProperty Name="topicName" ColumnName="topicName" />
+                <ScalarProperty Name="created_by" ColumnName="created_by" />
+                <ScalarProperty Name="modified_by" ColumnName="modified_by" />
+                <ScalarProperty Name="created_on" ColumnName="created_on" />
+                <ScalarProperty Name="modified_on" ColumnName="modified_on" />
+                <ScalarProperty Name="is_Active" ColumnName="is_Active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="userTests">
+            <EntityTypeMapping TypeName="OASModel.userTest">
+              <MappingFragment StoreEntitySet="userTest">
+                <ScalarProperty Name="is_Active" ColumnName="is_Active" />
+                <ScalarProperty Name="modified_by" ColumnName="modified_by" />
+                <ScalarProperty Name="created_by" ColumnName="created_by" />
+                <ScalarProperty Name="userTestID" ColumnName="userTestID" />
+                <ScalarProperty Name="userID" ColumnName="userID" />
+                <ScalarProperty Name="testID" ColumnName="testID" />
+                <ScalarProperty Name="marksScored" ColumnName="marksScored" />
+                <ScalarProperty Name="statusOfTest" ColumnName="statusOfTest" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="userTestAnswers">
+            <EntityTypeMapping TypeName="OASModel.userTestAnswer">
+              <MappingFragment StoreEntitySet="userTestAnswer">
+                <ScalarProperty Name="srno" ColumnName="srno" />
+                <ScalarProperty Name="userTestAnswerID" ColumnName="userTestAnswerID" />
+                <ScalarProperty Name="userTestID" ColumnName="userTestID" />
+                <ScalarProperty Name="questionID" ColumnName="questionID" />
+                <ScalarProperty Name="answerMarked" ColumnName="answerMarked" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="testLogs">
+            <EntityTypeMapping TypeName="OASModel.testLog">
+              <MappingFragment StoreEntitySet="testLog">
+                <ScalarProperty Name="testLogID" ColumnName="testLogID" />
+                <ScalarProperty Name="userTestID" ColumnName="userTestID" />
+                <ScalarProperty Name="topicID" ColumnName="topicID" />
+                <ScalarProperty Name="marksScored" ColumnName="marksScored" />
+                <ScalarProperty Name="testEnded" ColumnName="testEnded" />
+                <ScalarProperty Name="testStarted" ColumnName="testStarted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tests">
+            <EntityTypeMapping TypeName="OASModel.test">
+              <MappingFragment StoreEntitySet="test">
+                <ScalarProperty Name="passingMarks" ColumnName="passingMarks" />
+                <ScalarProperty Name="is_Active" ColumnName="is_Active" />
+                <ScalarProperty Name="modified_on" ColumnName="modified_on" />
+                <ScalarProperty Name="created_on" ColumnName="created_on" />
+                <ScalarProperty Name="modified_by" ColumnName="modified_by" />
+                <ScalarProperty Name="created_by" ColumnName="created_by" />
+                <ScalarProperty Name="available" ColumnName="available" />
+                <ScalarProperty Name="totalMarks" ColumnName="totalMarks" />
+                <ScalarProperty Name="questionPaperName" ColumnName="questionPaperName" />
+                <ScalarProperty Name="subcategoryID" ColumnName="subcategoryID" />
+                <ScalarProperty Name="duration" ColumnName="duration" />
+                <ScalarProperty Name="testID" ColumnName="testID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="questions">
+            <EntityTypeMapping TypeName="OASModel.question">
+              <MappingFragment StoreEntitySet="questions">
+                <ScalarProperty Name="is_Active" ColumnName="is_Active" />
+                <ScalarProperty Name="modified_on" ColumnName="modified_on" />
+                <ScalarProperty Name="created_on" ColumnName="created_on" />
+                <ScalarProperty Name="modified_by" ColumnName="modified_by" />
+                <ScalarProperty Name="created_by" ColumnName="created_by" />
+                <ScalarProperty Name="complexity" ColumnName="complexity" />
+                <ScalarProperty Name="marks" ColumnName="marks" />
+                <ScalarProperty Name="answer" ColumnName="answer" />
+                <ScalarProperty Name="testid" ColumnName="testid" />
+                <ScalarProperty Name="topicID" ColumnName="topicID" />
+                <ScalarProperty Name="option4" ColumnName="option4" />
+                <ScalarProperty Name="option3" ColumnName="option3" />
+                <ScalarProperty Name="option2" ColumnName="option2" />
+                <ScalarProperty Name="option1" ColumnName="option1" />
+                <ScalarProperty Name="answerType" ColumnName="answerType" />
+                <ScalarProperty Name="questionText" ColumnName="questionText" />
+                <ScalarProperty Name="questionID" ColumnName="questionID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="users">
+            <EntityTypeMapping TypeName="OASModel.user">
+              <MappingFragment StoreEntitySet="users">
+                <ScalarProperty Name="is_Active" ColumnName="is_Active" />
+                <ScalarProperty Name="createdDate" ColumnName="createdDate" />
+                <ScalarProperty Name="gender" ColumnName="gender" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="passw" ColumnName="passw" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="userID" ColumnName="userID" />
+                <ScalarProperty Name="roleID" ColumnName="roleID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
